@@ -6,10 +6,11 @@ import './styles/colors.dart';
 import './views/onboarding/onboarding_one_view.dart';
 import './views/onboarding/onboarding_three_view.dart';
 import './views/onboarding/onboarding_two_view.dart';
-import './views/home_view.dart';
+import './views/root/root_view.dart';
 import './views/splash_view.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -60,7 +61,7 @@ class QuickMartApp extends StatelessWidget {
       ),
       routes: {
         '/splash': (context) => const SplashView(),
-        '/home': (context) => const HomeView(),
+        '/home': (context) => const RootView(),
         '/onboarding-1': (context) => const OnBoardingOneView(),
         '/onboarding-2': (context) => const OnBoardingTwoView(),
         '/onboarding-3': (context) => const OnBoardingThreeView(),
@@ -76,7 +77,7 @@ class QuickMartApp extends StatelessWidget {
             return const OnBoardingOneView();
           }
 
-          return const HomeView();
+          return const RootView();
         },
       ),
     );
