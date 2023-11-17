@@ -19,48 +19,87 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
-      child: Column(
-        children: [
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Stack(children: [
           Container(
             height: 138,
-            width: 160,
             decoration: BoxDecoration(
-              color: image != null ? COLORS.grey150 : null,
+              color: image != null ? COLORS.black : null,
               borderRadius: BorderRadius.circular(24),
               image: DecorationImage(
+                fit: BoxFit.cover,
                 image: NetworkImage(image ?? ''),
               ),
             ),
           ),
-          colors.isNotEmpty
-              ? Row(
-                  children: [
-                    Row(
-                      children: colors
-                          .map(
-                            (color) => CircleAvatar(
-                              backgroundColor: color,
-                            ),
-                          )
-                          .toList(),
-                    ),
-                    const SizedBox(width: 10),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'All ${colors.length} Colors',
-                        style: const TextStyle(
-                          fontSize: 10,
-                        ),
+          Positioned(
+            right: 10,
+            top: 5,
+            child: GestureDetector(
+              child: const CircleAvatar(
+                radius: 15,
+                backgroundColor: COLORS.black,
+                child: Icon(
+                  Icons.heart_broken,
+                  size: 15,
+                ),
+              ),
+            ),
+          )
+        ]),
+        const Spacer(),
+        colors.isNotEmpty
+            ? Row(
+                children: [
+                  Row(
+                    children: colors
+                        .map(
+                          (color) => CircleAvatar(
+                            backgroundColor: color,
+                            radius: 15,
+                          ),
+                        )
+                        .toList(),
+                  ),
+                  const SizedBox(width: 5),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'All ${colors.length} Colors',
+                      style: const TextStyle(
+                        fontSize: 10,
                       ),
-                    )
-                  ],
-                )
-              : const SizedBox.shrink(),
-        ],
-      ),
+                    ),
+                  )
+                ],
+              )
+            : const SizedBox.shrink(),
+        Text(
+          name,
+          style: const TextStyle(
+            fontSize: 14,
+            color: COLORS.black,
+          ),
+        ),
+        const SizedBox(height: 5),
+        Text(
+          price,
+          style: const TextStyle(
+            fontSize: 12,
+            color: COLORS.black,
+          ),
+        ),
+        const SizedBox(height: 5),
+        Text(
+          price,
+          style: const TextStyle(
+            fontSize: 10,
+            color: COLORS.grey100,
+          ),
+        ),
+      ],
     );
   }
 }

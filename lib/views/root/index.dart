@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quick_mart_ecommerce/views/root/category_view.dart';
 import 'package:quick_mart_ecommerce/views/root/home_view.dart';
 import '../../styles/colors.dart';
 
@@ -16,7 +17,7 @@ class _RootViewState extends State<RootView> {
 
   final _buildBody = <Widget>[
     const HomeView(),
-    const HomeView(),
+    const CategoryView(),
     const HomeView(),
     const HomeView(),
     const HomeView(),
@@ -26,9 +27,15 @@ class _RootViewState extends State<RootView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: Image.asset('assets/logo/quickmart_second.png'),
+        leadingWidth: double.infinity,
+        leading: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(width: 10),
+            Image.asset(
+              'assets/logo/quickmart_second.png',
+            )
+          ],
         ),
         actions: [
           IconButton(
@@ -39,9 +46,15 @@ class _RootViewState extends State<RootView> {
               size: 30,
             ),
           ),
-          const CircleAvatar(
-            backgroundColor: COLORS.black,
-            radius: 18,
+          Align(
+            child: Container(
+              height: 32,
+              width: 32,
+              decoration: BoxDecoration(
+                  color: Colors.black, borderRadius: BorderRadius.circular(8)
+                  // image: DecorationImage(image: image)
+                  ),
+            ),
           ),
           const SizedBox(width: 10),
         ],

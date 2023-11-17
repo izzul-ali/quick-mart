@@ -6,7 +6,7 @@ import './styles/colors.dart';
 import './views/onboarding/onboarding_one_view.dart';
 import './views/onboarding/onboarding_three_view.dart';
 import './views/onboarding/onboarding_two_view.dart';
-import './views/root/root_view.dart';
+import './views/root/index.dart';
 import './views/splash_view.dart';
 
 Future<void> main() async {
