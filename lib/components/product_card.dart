@@ -19,87 +19,76 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Stack(children: [
-          Container(
-            height: 138,
-            decoration: BoxDecoration(
-              color: image != null ? COLORS.black : null,
-              borderRadius: BorderRadius.circular(24),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(image ?? ''),
-              ),
-            ),
-          ),
-          Positioned(
-            right: 10,
-            top: 5,
-            child: GestureDetector(
-              child: const CircleAvatar(
-                radius: 15,
-                backgroundColor: COLORS.black,
-                child: Icon(
-                  Icons.heart_broken,
-                  size: 15,
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(24),
+          bottom: Radius.circular(10),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Stack(
+            children: [
+              Container(
+                height: 140,
+                decoration: BoxDecoration(
+                  color: image != null ? COLORS.black : null,
+                  borderRadius: BorderRadius.circular(24),
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(image ?? ''),
+                  ),
                 ),
               ),
-            ),
-          )
-        ]),
-        const Spacer(),
-        colors.isNotEmpty
-            ? Row(
-                children: [
-                  Row(
-                    children: colors
-                        .map(
-                          (color) => CircleAvatar(
-                            backgroundColor: color,
-                            radius: 15,
-                          ),
-                        )
-                        .toList(),
-                  ),
-                  const SizedBox(width: 5),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'All ${colors.length} Colors',
-                      style: const TextStyle(
-                        fontSize: 10,
-                      ),
+              Positioned(
+                right: 10,
+                top: 5,
+                child: GestureDetector(
+                  child: const CircleAvatar(
+                    radius: 15,
+                    backgroundColor: COLORS.black,
+                    child: Icon(
+                      Icons.heart_broken,
+                      size: 15,
                     ),
-                  )
-                ],
+                  ),
+                ),
               )
-            : const SizedBox.shrink(),
-        Text(
-          name,
-          style: const TextStyle(
-            fontSize: 14,
-            color: COLORS.black,
+            ],
           ),
-        ),
-        const SizedBox(height: 5),
-        Text(
-          price,
-          style: const TextStyle(
-            fontSize: 12,
-            color: COLORS.black,
+          const SizedBox(height: 15),
+          Text(
+            name,
+            style: const TextStyle(
+              fontSize: 14,
+              color: COLORS.black,
+            ),
           ),
-        ),
-        const SizedBox(height: 5),
-        Text(
-          price,
-          style: const TextStyle(
-            fontSize: 10,
-            color: COLORS.grey100,
+          if (discount != null) ...[
+            const SizedBox(height: 15),
+            Text(
+              discount ?? '',
+              style: const TextStyle(
+                fontSize: 12,
+                decoration: TextDecoration.lineThrough,
+                color: COLORS.grey150,
+              ),
+            ),
+          ],
+          const SizedBox(height: 5),
+          Text(
+            price,
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+              color: COLORS.black,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
