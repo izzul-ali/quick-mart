@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quick_mart_ecommerce/components/logo.dart';
 import 'package:quick_mart_ecommerce/views/root/category_view.dart';
 import 'package:quick_mart_ecommerce/views/root/home_view.dart';
 import '../../styles/colors.dart';
@@ -28,15 +29,7 @@ class _RootViewState extends State<RootView> {
     return Scaffold(
       appBar: AppBar(
         leadingWidth: double.infinity,
-        leading: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const SizedBox(width: 10),
-            Image.asset(
-              'assets/logo/quickmart_second.png',
-            )
-          ],
-        ),
+        leading: const Expanded(child: QuickMartLogo()),
         actions: [
           IconButton(
             onPressed: () {},
