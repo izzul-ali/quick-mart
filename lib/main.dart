@@ -3,11 +3,10 @@ import 'package:flutter/services.dart';
 
 import './styles/colors.dart';
 
-import './views/onboarding/onboarding_one_view.dart';
-import './views/onboarding/onboarding_three_view.dart';
-import './views/onboarding/onboarding_two_view.dart';
+import './views/onboarding_view.dart';
 import './views/root/index.dart';
 import './views/splash_view.dart';
+import './views/auth/register_view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +14,13 @@ Future<void> main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.white,
+      statusBarIconBrightness: Brightness.dark,
+    ),
+  );
 
   runApp(const QuickMartApp());
 }
@@ -24,7 +30,7 @@ class QuickMartApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isNewUser = true;
+    bool isNotLoggedIn = true;
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -39,6 +45,13 @@ class QuickMartApp extends StatelessWidget {
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: Colors.white,
             statusBarIconBrightness: Brightness.dark,
+          ),
+        ),
+        iconButtonTheme: const IconButtonThemeData(
+          style: ButtonStyle(
+            iconColor: MaterialStatePropertyAll(
+              COLORS.grey150,
+            ),
           ),
         ),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -61,10 +74,9 @@ class QuickMartApp extends StatelessWidget {
       ),
       routes: {
         '/splash': (context) => const SplashView(),
+        '/onboarding': (context) => const OnboardingView(),
+        '/register': (context) => const RegisterView(),
         '/home': (context) => const RootView(),
-        '/onboarding-1': (context) => const OnBoardingOneView(),
-        '/onboarding-2': (context) => const OnBoardingTwoView(),
-        '/onboarding-3': (context) => const OnBoardingThreeView(),
       },
       home: FutureBuilder(
         future: Future.delayed(const Duration(seconds: 2)),
@@ -73,8 +85,8 @@ class QuickMartApp extends StatelessWidget {
             return const SplashView();
           }
 
-          if (isNewUser) {
-            return const OnBoardingOneView();
+          if (isNotLoggedIn) {
+            return const OnboardingView();
           }
 
           return const RootView();
